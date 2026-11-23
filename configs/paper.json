@@ -1,0 +1,26 @@
+{
+  "name": "synthetic-cache-study-v1",
+  "description": "Predeclared synthetic functional-simulation study; no hardware speedup claim",
+  "measured_requests": 12000,
+  "warmup": 3000,
+  "seeds": [11, 23, 37, 53, 71],
+  "l3_lines": [256, 512, 1024],
+  "workloads": ["sequential", "looping", "random", "zipf", "phase_shift", "mixed_scan"],
+  "policies": ["lru", "fifo", "lfu", "srrip", "online", "frozen", "recency"],
+  "simulator": {
+    "line_bytes": 64,
+    "l1_lines": 32,
+    "l2_lines": 128,
+    "l1_ways": 4,
+    "l2_ways": 8,
+    "l3_ways": 8,
+    "l1_cycles": 4,
+    "l2_cycles": 12,
+    "l3_cycles": 40,
+    "ram_cycles": 200,
+    "horizon": 256,
+    "learning_rate": 0.05,
+    "min_labels": 64,
+    "window": 1000
+  }
+}

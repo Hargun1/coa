@@ -1,0 +1,11 @@
+{
+  "results_file": "C:\\Users\\hargu\\OneDrive\\Documents\\coa\\results\\benchmark.json",
+  "results_sha256": "78d30f04228e50746c714b2f78664dc5363525a82ca6f0e6f49d3d492030ff63",
+  "run_count": 630,
+  "paper_title": "Online Learning for Adaptive Cache Replacement Under Changing Access Patterns",
+  "generated_files": [
+    "paper/research_paper.md",
+    "paper/research_paper.tex",
+    "output/pdf/research_paper.pdf"
+  ]
+}

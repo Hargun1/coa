@@ -1,0 +1,10 @@
+[project]
+name = "adaptive-memory-lab"
+version = "1.0.0"
+description = "Reproducible trace-driven cache replacement experiments with delayed online learning"
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+

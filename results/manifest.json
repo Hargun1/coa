@@ -1,0 +1,76 @@
+{
+  "study": {
+    "name": "synthetic-cache-study-v1",
+    "description": "Predeclared synthetic functional-simulation study; no hardware speedup claim",
+    "measured_requests": 12000,
+    "warmup": 3000,
+    "seeds": [
+      11,
+      23,
+      37,
+      53,
+      71
+    ],
+    "l3_lines": [
+      256,
+      512,
+      1024
+    ],
+    "workloads": [
+      "sequential",
+      "looping",
+      "random",
+      "zipf",
+      "phase_shift",
+      "mixed_scan"
+    ],
+    "policies": [
+      "lru",
+      "fifo",
+      "lfu",
+      "srrip",
+      "online",
+      "frozen",
+      "recency"
+    ],
+    "simulator": {
+      "line_bytes": 64,
+      "l1_lines": 32,
+      "l2_lines": 128,
+      "l1_ways": 4,
+      "l2_ways": 8,
+      "l3_ways": 8,
+      "l1_cycles": 4,
+      "l2_cycles": 12,
+      "l3_cycles": 40,
+      "ram_cycles": 200,
+      "horizon": 256,
+      "learning_rate": 0.05,
+      "min_labels": 64,
+      "window": 1000
+    }
+  },
+  "started_utc": "2026-11-20T18:38:04.256237+00:00",
+  "completed_utc": "2026-11-20T18:41:02.080320+00:00",
+  "python": "3.13.1 (tags/v3.13.1:0671451, Dec  3 2024, 19:06:28) [MSC v.1942 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "source_sha256": {
+    "adaptive_memory/__init__.py": "f6c4012d39f4535986b1dcef22a32896319417c290f99a84678b1e855b055c11",
+    "adaptive_memory/__main__.py": "859136a76d601c10ba965e01a745e2eacc39dacf5e79934029c2f2a1fc5d5d28",
+    "adaptive_memory/config.py": "c36171edd9dbe57587558e09b03a11cd09ee08c812aa508951c6bf51633d4f34",
+    "adaptive_memory/experiments.py": "59920a96249ae901d8807cf982905992ca2ef4c08dee64e0741eca658aa9ab59",
+    "adaptive_memory/policies.py": "0b09db4e409382a4097e4526c68124f1b237d7ac859698e6fe8f5b2eef2fb6b0",
+    "adaptive_memory/reporting.py": "e9cb330c7190e1eb92bd9b4eaf32ee8e7923278258c258992a5164c06e47e014",
+    "adaptive_memory/server.py": "5cc5f5143023466323874af66abe63354f9d2935d67064f44253fc40d117ec0f",
+    "adaptive_memory/simulator.py": "4e341dc779b5ae19fd7eb836cbcb0fab3db8d5f73d6435dad0a71de3cead0beb",
+    "adaptive_memory/workloads.py": "c7869f639f8e3847c8ab56b5e609a6164f687fad61f6f773d6893f2a9c752f4f",
+    "configs/paper.json": "f94c453dc20d901e7651d82a2519602dd5d0a566d1190b6e477b0c406c83bf35",
+    "tests/test_server.py": "b68434e69823d832b73063b6e35d933901ac1d75f8d2bd94c7c7a3a15e227e84",
+    "tests/test_simulator.py": "9e71a33e0f351f0b27ba21d13beb93f8d55e626c80e0a2aca054f18047cdd6a9"
+  },
+  "source_unchanged_during_run": true,
+  "run_count": 630,
+  "trace_type": "synthetic read-only byte-address traces",
+  "model": "serial non-inclusive functional caches; no CPU execution or hardware overhead model",
+  "uncertainty": "95% percentile bootstrap of paired generator seeds within each workload and size; five seeds are exploratory"
+}

@@ -1,0 +1,8 @@
+{
+  "status": "passed",
+  "archive_crc": "passed",
+  "file_checksums_verified": 41,
+  "fresh_extraction": "C:\\Users\\hargu\\OneDrive\\Documents\\coa\\tmp\\bundle-smoke-bc2d6b74",
+  "stdlib_only_simulation": "passed",
+  "stored_result_verification": "PASS: 630 simulations, paired traces, accounting, bounded metadata, source hashes, summaries, and paper provenance"
+}

@@ -1,0 +1,52 @@
+{
+  "checked_utc": "2026-11-20T18:42:35.178248+00:00",
+  "unit_tests": {
+    "command": ".venv/Scripts/python.exe -m pytest -q",
+    "passed": 44,
+    "failed": 0
+  },
+  "experiment_verification": {
+    "command": "python scripts/verify_artifacts.py",
+    "status": "passed",
+    "simulations": 630,
+    "paired_cases": 90,
+    "checks": [
+      "counter conservation",
+      "paired trace hashes",
+      "identical upper-cache miss counts",
+      "bounded learning metadata",
+      "frozen update gate",
+      "source hashes",
+      "summary recomputation",
+      "paper result provenance"
+    ]
+  },
+  "browser": {
+    "status": "passed",
+    "console_errors": [],
+    "checked": [
+      "saved results",
+      "workload/capacity controls",
+      "live seven-policy run",
+      "restore",
+      "paper PDF",
+      "390px responsive layout"
+    ]
+  },
+  "pdf": {
+    "pages": 8,
+    "boundary_checks": "passed",
+    "visual_review": "all eight rendered pages inspected; tables, charts, equations, references and page boundaries checked"
+  },
+  "server": {
+    "status": "ok",
+    "application": "Adaptive Memory Lab"
+  },
+  "unverified": [
+    "real application workloads",
+    "physical CPU performance or energy",
+    "architectural simulator comparison",
+    "publication novelty",
+    "LaTeX compilation"
+  ]
+}

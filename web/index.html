@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Adaptive Memory Lab</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <aside>
+    <a class="brand" href="/" aria-label="Adaptive Memory Lab home"><span class="brand-icon">M</span><span>MEMORY<br><strong>LAB</strong></span></a>
+    <p class="eyebrow">COMPUTER ARCHITECTURE</p>
+    <a class="nav active" href="#experiment">01 <span>Experiment bench</span></a>
+    <a class="nav" href="#comparison">02 <span>Policy comparison</span></a>
+    <a class="nav" href="#adaptation">03 <span>Adaptation over time</span></a>
+    <a class="nav" href="/paper.pdf" target="_blank" rel="noopener">04 <span>Research paper ↗</span></a>
+    <div class="aside-bottom"><span class="dot"></span> Local simulation<br><small>Read-only traces · 64-byte lines<br>Functional model · Python</small></div>
+  </aside>
+  <main>
+    <header><span>RESEARCH WORKSPACE / CACHE REPLACEMENT</span><span class="pill">v1.0 · Experimental</span></header>
+    <section id="experiment" class="intro">
+      <div><p class="eyebrow">SELF-ADAPTIVE MEMORY ARCHITECTURE</p><h1>What should<br>the cache keep?</h1><p class="lede">Explore how an online learning policy predicts reuse and makes room for the next memory request.</p></div>
+      <div class="intro-note"><span class="small-number">07</span><p>replacement policies.<br>One identical access trace.</p><span class="micro">LRU · FIFO · LFU · SRRIP<br>ONLINE · FROZEN · RECENCY</span></div>
+    </section>
+    <section class="hierarchy" aria-label="Simulated hierarchy">
+      <div><span>01 / L1</span><strong>2 KiB</strong><small>LRU · 4 cycles</small></div><b aria-hidden="true">→</b>
+      <div><span>02 / L2</span><strong>8 KiB</strong><small>LRU · +12 cycles</small></div><b aria-hidden="true">→</b>
+      <div class="learned-tier"><span>03 / L3 <em>POLICY UNDER TEST</em></span><strong id="tier-size">32 KiB</strong><small>8-way · +40 cycles</small></div><b aria-hidden="true">→</b>
+      <div><span>04 / RAM</span><strong>Backing memory</strong><small>+200 cycles on LLC miss</small></div>
+    </section>
+    <form id="controls" class="controls">
+      <label>ACCESS PATTERN<select id="workload"><option value="phase_shift">Changing hotspots</option><option value="mixed_scan">Hotset + streaming scans</option><option value="zipf">Zipf popularity</option><option value="random">Uniform random</option><option value="looping">Repeated loop</option><option value="sequential">Sequential stream</option></select></label>
+      <label>L3 CAPACITY<select id="capacity"><option value="256">16 KiB / 256 lines</option><option value="512" selected>32 KiB / 512 lines</option><option value="1024">64 KiB / 1024 lines</option></select></label>
+      <label>REUSE HORIZON<select id="horizon"><option value="64">64 LLC requests</option><option value="256" selected>256 LLC requests</option><option value="1024">1024 LLC requests</option></select></label>
+      <label>TRACE SEED<input id="seed" type="number" min="0" max="99999" value="11" required></label>
+      <button id="run" type="submit">Run experiment <span>↗</span></button>
+    </form>
+    <div class="dataset-line"><p id="status" role="status" aria-live="polite">Loading measured results…</p><button id="restore" class="text-button" type="button">Restore paper results ↺</button></div>
+    <section class="metrics" aria-label="Measured results">
+      <article><span>ONLINE POLICY / MODELED AMAT</span><strong id="amat">—</strong><small>cycles per measured memory request</small></article>
+      <article><span>CHANGE RELATIVE TO LRU</span><strong id="reduction">—</strong><small id="reduction-note">Positive means lower modeled latency</small></article>
+      <article><span>ONLINE / TOTAL CACHE HIT RATE</span><strong id="hit-rate">—</strong><small>Requests served by L1, L2, or L3</small></article>
+      <article><span>ONLINE / SIMULATOR RUNTIME</span><strong id="runtime">—</strong><small>Python wall time, separate from modeled cycles</small></article>
+    </section>
+    <section id="comparison" class="panel"><div class="panel-heading"><div><p class="eyebrow">01 / THE COMPARISON</p><h2>Same workload. Different decisions.</h2></div><span class="chart-key"><i></i>Online learning</span></div><p class="chart-note">Average modeled access time in cycles. Lower is better. Upper cache policies and trace are held fixed.</p><div id="bars" role="img" aria-label="Policy comparison bar chart"></div><div class="table-wrap"><table><thead><tr><th scope="col">Policy</th><th scope="col">AMAT / cycles</th><th scope="col">Total hit rate</th><th scope="col">Fill traffic / KiB</th><th scope="col">Python runtime / ms</th></tr></thead><tbody id="policy-table"></tbody></table></div></section>
+    <section id="adaptation" class="panel"><div class="panel-heading"><div><p class="eyebrow">02 / THE ACCESS STREAM</p><h2>Watch the workload change.</h2></div><div class="legend"><span class="online">Online</span><span class="lru">LRU</span><span class="srrip">SRRIP</span></div></div><p class="chart-note">Mean latency within each 1,000-request measurement window. Warmup is excluded.</p><div id="timeline" role="img" aria-label="Latency over request windows"></div></section>
+    <section class="explanation"><div><p class="eyebrow">HOW THE LEARNER DECIDES</p><h2>Learn from the past.<br>Measure what happens next.</h2></div><div><p>A small logistic model scores the likelihood that each eviction candidate will be reused. Its features describe recency, decayed frequency, the previous access interval, and reuse history.</p><p>Labels mature only after the reuse horizon has passed. The frozen variant stops learning after warmup; the recency variant removes the other features.</p><p class="limits">This is a scaled, serial cache model. It does not measure real CPU speedup, hardware inference cost, page faults, or operating-system migration. The learner can lose to conventional policies.</p></div></section>
+    <footer><span>ADAPTIVE MEMORY LAB</span><span>Reproducible traces. Measured outcomes. Explicit assumptions.</span></footer>
+  </main>
+</body>
+</html>
